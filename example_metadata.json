@@ -1,0 +1,13 @@
+{
+  "name": "My Collection NFT",
+  "image": "https://via.placeholder.com/350",
+  "description": "YOMI Solana NFT Collection",
+  "external_url": "https://yomi.digital",
+  "attributes": [
+    {
+      "display_type": "boost_percentage",
+      "trait_type": "Testing",
+      "value": 100
+    }
+  ]
+}

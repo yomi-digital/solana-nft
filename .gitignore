@@ -1,0 +1,4 @@
+node_modules
+.env
+configs/*
+!configs/example.json
