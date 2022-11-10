@@ -2,3 +2,6 @@ node_modules
 .env
 configs/*
 !configs/example.json
+candy-machine/sugar.log
+candy-machine/config.json
+candy-machine/cache.json

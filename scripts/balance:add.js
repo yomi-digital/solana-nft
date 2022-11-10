@@ -4,6 +4,10 @@ import { getWallet } from '../utils/wallet.js'
 
 async function main() {
   const network = process.argv[2]
+  if(network !== 'devnet') {
+    console.log(`Can't request funds on ${network} network`)
+    return;
+  }
   let wallet = await getWallet(network)
   exec(`solana airdrop 1 ${wallet.publicKey.toBase58()} --url ${networks[network].url}`, (error, stdout, stderr) => {
       if (error) {

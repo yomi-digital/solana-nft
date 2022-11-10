@@ -1,15 +1,34 @@
+## Requirements
+You should have installed the followings CLI tools:
+  - [Yarn](https://yarnpkg.com/) (or [NPM](https://docs.npmjs.com/cli/))
+  - [Solana CLI Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
+
+
 ## Directory structure
+- `candy-machine` contains all of your Candy Machine configuration files and assets.
 - `configs` stores all of the wallets used in different networks;
 - `constants` houses all of your project constant settings files;
 - `utils` contains additional useful functions imported in different application files;
 - `scripts` contains scripts you can run by enter `yarn task <filename> <network>`;
 
 ## Commands
+
+### Generating a new wallet
+The first thing you must do to work with Metaplex is generating a new wallet or use an existing one.
 ```sh
-# yarn mint <network>
+# yarn task wallet <network>
+yarn task wallet devnet
+```
+This creates a new wallet if an old one named `devnet`.json inside the `configs` folder is not found. To force generating a new one, you can simply delete the `devnet`.json file and run the command again. 
+
+### Candy Machine
+In order to mint some ntfs on Solana using Metaplex, you need to setup a [Candy Machine](https://docs.metaplex.com/programs/candy-machine/overview). Go inside the [candy-machine](https://github.com/yomi-digital/solana-nft/tree/main/candy-machine) folder and take a look at the [README](https://github.com/yomi-digital/solana-nft/blob/main/candy-machine/README.md) to start.
+
+### Minting
+```sh
 yarn mint devnet
 ```
-This command will create a new NFTs Collection and a new Candy Machine using a new wallet if an old one named `devnet` is not found.
+After you've created a Candy Machine this command will mint all of your NFTs inside of it.
 
 ### Tasks
 You can execute any tasks you find inside the `scripts` folder using the `yarn task <filename> <network>` command.
