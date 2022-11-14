@@ -1,0 +1,13 @@
+{
+  "name": "YOMI",
+  "image": "https://gateway.pinata.cloud/ipfs/QmahPuJH4BgC8g78kiSyfmq3cW4XypDeQTtSfiuWPkudDM/0.jpg",
+  "description": "YOMI Solana NFT Collection",
+  "external_url": "https://yomi.digital",
+  "attributes": [
+    {
+      "display_type": "boost_percentage",
+      "trait_type": "Testing",
+      "value": 100
+    }
+  ]
+}

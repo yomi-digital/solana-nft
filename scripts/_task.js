@@ -1,19 +1,13 @@
 import fs from 'fs';
-import { exec } from "child_process";
+import { execSync } from "child_process";
 
 let scriptFile
 let task = process.argv[2]
 let network = process.argv[3]
 async function run() {
-  exec(`node ${scriptFile} ${network}`, (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-    }
-    console.log(`${stdout}`);
-  });
+  execSync(`node ${scriptFile} ${network}`, { stdio: 'inherit' });
+  console.log('All done, exiting!')
+  process.exit();
 }
 
 if (task && network) {

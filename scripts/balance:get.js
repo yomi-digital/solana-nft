@@ -5,6 +5,7 @@ import { getWallet } from '../utils/wallet.js'
 async function main() {
   const network = process.argv[2]
   let wallet = await getWallet(network)
+  console.log("Getting current balance...")
   exec(`solana balance ${wallet.publicKey.toBase58()} --url ${networks[network].url}`, (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`);

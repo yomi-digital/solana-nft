@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@metaplex-foundation/js": "^0.17.5",
+    "@solana/spl-token": "^0.3.6",
     "@solana/web3.js": "^1.66.2",
     "minimist": "^1.2.7"
   }
