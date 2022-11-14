@@ -1,6 +1,6 @@
 import { Metaplex, keypairIdentity, bundlrStorage, toBigNumber, sol, toDateTime } from "@metaplex-foundation/js";
 import { Connection, clusterApiUrl, Keypair } from "@solana/web3.js";
-
+import { writeFile } from 'node:fs/promises';
 import { getWallet } from '../utils/wallet.js';
 
 async function main() {
@@ -56,6 +56,12 @@ async function main() {
   };
   const { candyMachine } = await metaplex.candyMachines().create(candyMachineSettings)
   console.log("Candy Machine created at: ", candyMachine.address.toBase58())
+  let newWallet = {}
+  newWallet.public_key = wallet.publicKey.toBase58();
+  newWallet.secret_key = Object.values(wallet.secretKey);
+  newWallet.candy_machine_address = candyMachine.address.toBase58();
+  const data = new Uint8Array(Buffer.from(JSON.stringify(newWallet)));
+  await writeFile(`./configs/${network}.json`, data);
 }
 
 try {

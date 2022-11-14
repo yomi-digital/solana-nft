@@ -1,12 +1,12 @@
 import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/js";
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 
-import { getWallet } from '../utils/wallet.js';
+import { getWallet, getCandyMachineAddress } from '../utils/wallet.js';
 
 async function main() {
   const network = process.argv[2]
   let wallet = await getWallet(network);
-  const candyMachineAddress = "8qToifCxqeVFWGvda55ycuQPHXMrpT1ctAoK3725a9gX";
+  let candyMachineAddress = await getCandyMachineAddress(network)
   if (!candyMachineAddress) {
     console.log("Candy Machine address is empty")
     return;
@@ -24,9 +24,10 @@ async function main() {
     .findByAddress({ address: new PublicKey(candyMachineAddress) });
   // minting
   console.log("Minting...")
+  const collectionUpdateAuthority = wallet.publicKey.toBase58()
   const { nft } = await metaplex.candyMachines().mint({
     candyMachine,
-    wallet
+    collectionUpdateAuthority
   });
   console.log("Minted successfully!", nft)
   console.log(candyMachine.items[0].name)

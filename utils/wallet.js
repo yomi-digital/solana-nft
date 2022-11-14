@@ -14,10 +14,23 @@ export const getWallet = async (network) => {
     const newWallet = Keypair.generate();
     wallet.public_key = newWallet.publicKey.toBase58();
     wallet.secret_key = Object.values(newWallet.secretKey);
+    wallet.candy_machine_address = "";
     await copyFile('./configs/example.json', `./configs/${network}.json`);
     const data = new Uint8Array(Buffer.from(JSON.stringify(wallet)));
     await writeFile(`./configs/${network}.json`, data);
     wallet = newWallet
   }
   return wallet
+}
+
+export const getCandyMachineAddress = async (network) => {
+  let candyMachineAddress;
+  try {
+    candyMachineAddress = await readFile(`./configs/${network}.json`, { encoding: 'utf8' });
+    candyMachineAddress = JSON.parse(candyMachineAddress).candy_machine_address;
+  }
+  catch {
+    candyMachineAddress = null
+  }
+  return candyMachineAddress
 }
