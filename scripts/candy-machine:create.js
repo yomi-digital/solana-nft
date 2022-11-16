@@ -1,5 +1,5 @@
 import { Metaplex, keypairIdentity, bundlrStorage, toBigNumber, sol, toDateTime } from "@metaplex-foundation/js";
-import { Connection, clusterApiUrl, Keypair } from "@solana/web3.js";
+import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { writeFile } from 'node:fs/promises';
 import { getWallet } from '../utils/wallet.js';
 
@@ -17,27 +17,26 @@ async function main() {
   const { nft: collectionNft } = await metaplex.nfts().create({
     name: "YOMI",
     uri: "https://raw.githubusercontent.com/yomi-digital/solana-nft/main/example_metadata/0.json",
-    //isCollection: true,
     updateAuthority: wallet,
-    sellerFeeBasisPoints: 333
+    sellerFeeBasisPoints: 0,
+    isCollection: true
   });
 
   console.log("NFT collection created at: ", collectionNft.address.toBase58())
   console.log("Creating Candy Machine...")
   // creating Candy Machine
   const candyMachineSettings = {
-    withoutCandyGuard: true,
     authority: wallet,
     sellerFeeBasisPoints: 333,
     symbol: "",
-    maxEditionSupply: toBigNumber(1),
+    maxEditionSupply: toBigNumber(0),
     isMutable: true,
     creators: [
       { address: wallet.publicKey, share: 100 }
     ],
     collection: {
       address: collectionNft.address,
-      updateAuthority: wallet,
+      updateAuthority: wallet
     },
     itemsAvailable: toBigNumber(1),
     itemSettings: {

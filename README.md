@@ -24,9 +24,16 @@ This command will add 1 SOL to the current devnet wallet address balance.
 ### Generating a new wallet
 ```sh
 # yarn task wallet <network>
-yarn task wallet devnet
+yarn task wallet:get devnet
 ```
 This creates a new wallet if an old one named `devnet`.json inside the `configs` folder is not found. To force generating a new one, you can simply delete the `devnet`.json file and run the command again. 
+
+### Importing a new wallet
+```sh
+# yarn task wallet <network> <private_key_base58>
+yarn task wallet:import devnet <your_private_key_base58>
+```
+This creates a new wallet derived from the private key if an old one named `devnet`.json inside the `configs` folder is not found.
 
 ### Minting
 1.  In order to mint some ntfs on Solana using Metaplex, you need to setup a [Candy Machine](https://docs.metaplex.com/programs/candy-machine/overview) first.
@@ -46,4 +53,4 @@ This creates a new wallet if an old one named `devnet`.json inside the `configs`
 
 
 
-Node used version: 16.17.0
+Node used version: 18.12.1

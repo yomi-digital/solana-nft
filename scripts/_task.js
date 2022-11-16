@@ -4,8 +4,9 @@ import { execSync } from "child_process";
 let scriptFile
 let task = process.argv[2]
 let network = process.argv[3]
+let other = process.argv[4]
 async function run() {
-  execSync(`node ${scriptFile} ${network}`, { stdio: 'inherit' });
+  execSync(`node ${scriptFile} ${network} ${(other) ? other : ''}`, { stdio: 'inherit' });
   console.log('All done, exiting!')
   process.exit();
 }
