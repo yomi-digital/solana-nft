@@ -1,7 +1,7 @@
 ## Requirements
-You should have installed the followings CLI tools:
+You should have installed:
+  - [Node](https://nodejs.org/it/download/) (18.12.1 reccomended)
   - [Yarn](https://yarnpkg.com/) (or [NPM](https://docs.npmjs.com/cli/))
-  - [Solana CLI Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools)
 
 
 ## Directory structure
@@ -12,30 +12,41 @@ You should have installed the followings CLI tools:
 - `scripts` contains scripts you can run by enter `yarn task <filename> <network>`;
 
 ## Commands
+### Install dependencies
+The first thing you need to do in order to be able to use the other commands is to install the project dependencies.
+Move inside the project folder and run:
+```sh
+npm install
+#or
+yarn
+```
 ### Tasks
 You can execute any tasks you find inside the `scripts` folder using the `yarn task <filename> <network>` command.
 ```sh
-# yarn task <network>
+# yarn task <task> <network>
+#or
+# npm run task <task> <network>
 yarn task balance:add devnet
+
 ```
 
 This command will add 1 SOL to the current devnet wallet address balance.
 
-### Generating a new wallet
+### Generate a new wallet
 ```sh
 # yarn task wallet <network>
 yarn task wallet:get devnet
 ```
 This creates a new wallet if an old one named `devnet`.json inside the `configs` folder is not found. To force generating a new one, you can simply delete the `devnet`.json file and run the command again. 
 
-### Importing a new wallet
+### Import a new wallet
 ```sh
 # yarn task wallet <network> <private_key_base58>
 yarn task wallet:import devnet <your_private_key_base58>
 ```
 This creates a new wallet derived from the private key if an old one named `devnet`.json inside the `configs` folder is not found.
 
-### Minting
+### Mint
 1.  In order to mint some ntfs on Solana using Metaplex, you need to setup a [Candy Machine](https://docs.metaplex.com/programs/candy-machine/overview) first.
     ```sh
     yarn task candy-machine:create devnet

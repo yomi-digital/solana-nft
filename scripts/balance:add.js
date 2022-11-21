@@ -1,24 +1,19 @@
-import { exec } from "child_process";
-import { networks } from '../constants/networks.js'
-import { getWallet } from '../utils/wallet.js'
+import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+
+import { getWallet } from '../utils/wallet.js';
 
 async function main() {
   const network = process.argv[2]
-  if(network !== 'devnet') {
-    console.log(`Can't request funds on ${network} network`)
-    return;
-  }
-  let wallet = await getWallet(network)
-  exec(`solana airdrop 1 ${wallet.publicKey.toBase58()} --url ${networks[network].url}`, (error, stdout, stderr) => {
-      if (error) {
-          console.log(`error: ${error.message}`);
-          return;
-      }
-      if (stderr) {
-          console.log(`stderr: ${stderr}`);
-      }
-      console.log(`${stdout}`);
-  });
+  console.log("Network: ", network);
+  let wallet = await getWallet(network);
+  console.log("Wallet address: ", wallet.publicKey.toBase58())
+  // Connection
+  const connection = new Connection(clusterApiUrl(network));
+  let airdropSignature = await connection.requestAirdrop(
+    wallet.publicKey,
+    LAMPORTS_PER_SOL,
+  );
+  console.log("1 SOL sent")
 }
 
 try {
