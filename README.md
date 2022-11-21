@@ -1,6 +1,6 @@
 ## Requirements
 You should have installed:
-  - [Node](https://nodejs.org/it/download/) (18.12.1 reccomended)
+  - [Node](https://nodejs.org/it/download/) (18.12.1 recommended)
   - [Yarn](https://yarnpkg.com/) (or [NPM](https://docs.npmjs.com/cli/))
 
 
